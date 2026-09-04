@@ -12,9 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# 2.0G + 8M
-BOARD_SUPER_PARTITION_SIZE := 2155872256
-BOARD_EMULATOR_DYNAMIC_PARTITIONS_SIZE := 2147483648
+# 3.0G + 8M. Keep enough room for the complete emulator graphics stack and
+# the preinstalled KernelSU-Next Manager.
+BOARD_SUPER_PARTITION_SIZE := 3229614080
+BOARD_EMULATOR_DYNAMIC_PARTITIONS_SIZE := 3221225472
 
 PRODUCT_SDK_ADDON_COPY_FILES += \
     device/generic/goldfish/data/etc/advancedFeatures.ini.arm:images/arm64-v8a/advancedFeatures.ini \
