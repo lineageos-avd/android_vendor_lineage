@@ -152,9 +152,13 @@ PRODUCT_PACKAGES += \
 endif
 
 ifeq ($(PRODUCT_IS_AUTOMOTIVE),)
+ifneq ($(LINEAGE_BUILD_SKIP_SETUPWIZARD),true)
 PRODUCT_PACKAGES += \
     LineageParts \
     LineageSetupWizard
+else
+PRODUCT_PACKAGES += LineageParts
+endif
 endif
 
 PRODUCT_PACKAGES += \

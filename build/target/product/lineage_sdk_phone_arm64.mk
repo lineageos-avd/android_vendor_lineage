@@ -15,6 +15,10 @@
 $(call inherit-product, device/generic/goldfish/64bitonly/product/sdk_phone64_arm64.mk)
 $(call inherit-product, vendor/lineage/build/target/product/lineage_sdk_phone_arm64_board.mk)
 
+# The emulator SdkSetup provisions the device non-interactively. Do not ship
+# the interactive LineageOS first-boot wizard.
+LINEAGE_BUILD_SKIP_SETUPWIZARD := true
+
 include vendor/lineage/build/target/product/lineage_generic_target.mk
 
 # Always build modules from source
@@ -29,3 +33,12 @@ PRODUCT_MODEL := LineageOS Android SDK built for arm64
 
 PRODUCT_SDK_ADDON_NAME := lineage
 PRODUCT_SDK_ADDON_SYS_IMG_SOURCE_PROP := vendor/lineage/build/target/product/source.properties
+
+# Enable Android's complete gestural-navigation RRO by default. The framework
+# overlay also seeds mode 2 so the image remains gestural if OMS is reset.
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.boot.vendor.overlay.theme=com.android.internal.systemui.navbar.gestural
+
+# Preinstall the official KernelSU-Next Manager and its native payload.
+PRODUCT_PACKAGES += KernelSU_Next
+TARGET_FS_CONFIG_GEN += vendor/lineage/prebuilt/common/app/KernelSU_Next/config.fs
